@@ -1,0 +1,2 @@
+include ':app', ':chatapi', ':chatimpl', ':dependencyholder'
+rootProject.name='Chat Test App'

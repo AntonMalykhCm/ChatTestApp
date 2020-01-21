@@ -1,0 +1,8 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.example.chatimpl" >
+
+    <application>
+        <activity android:name=".ui.ChatActivityImpl"
+            android:theme="@style/Theme.AppCompat.DayNight.NoActionBar"/>
+    </application>
+</manifest>
