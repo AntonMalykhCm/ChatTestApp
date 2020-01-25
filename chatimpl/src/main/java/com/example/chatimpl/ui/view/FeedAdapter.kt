@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.chatimpl.R
 import com.example.chatimpl.data.ChatStateImpl
 
-class FeedAdapter : RecyclerView.Adapter<FeedAdapter.MessageViewHolder>() {
+internal class FeedAdapter : RecyclerView.Adapter<FeedAdapter.MessageViewHolder>() {
 
     private companion object{
         const val TYPE_INCOMING = 0

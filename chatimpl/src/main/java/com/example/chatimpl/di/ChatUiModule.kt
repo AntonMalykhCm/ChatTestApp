@@ -5,7 +5,7 @@ import dagger.Provides
 import javax.inject.Singleton
 
 @Module
-class ChatUiModule {
+internal class ChatUiModule {
 
     @Singleton
     @Provides

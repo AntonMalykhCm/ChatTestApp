@@ -12,7 +12,7 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
 import javax.inject.Inject
 
-abstract class ChatFragmentBase : Fragment() {
+internal abstract class ChatFragmentBase : Fragment() {
 
     internal companion object {
         const val ARG_KEY_DEPENDENCY_KEY = "ChatFragmentBase.KEY_DEPENDENCY_KEY"

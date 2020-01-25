@@ -2,7 +2,7 @@ package com.example.chatimpl.data
 
 import com.example.chatapi.ChatState
 
-data class ChatStateImpl(
+internal data class ChatStateImpl(
     val headerState: HeaderState,
     val feedState: FeedState,
     val messageState: MessageState

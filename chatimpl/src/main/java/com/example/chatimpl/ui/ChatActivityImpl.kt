@@ -94,7 +94,7 @@ class ChatActivityImpl : ChatActivity<ChatStateImpl>() {
             .commit()
     }
 
-    class ChatUiDependenciesImpl(
+    internal class ChatUiDependenciesImpl(
         private val actionSupplier: ChatActionSupplier,
         private val chatStoreImpl: ChatStore<ChatStateImpl>
     ) : ChatUiDependencies{

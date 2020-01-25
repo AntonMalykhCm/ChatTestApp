@@ -11,7 +11,7 @@ import javax.inject.Singleton
         ChatUiModule::class
     ]
 )
-interface ChatUiComponent {
+internal interface ChatUiComponent {
 
     fun inject(fragment: ChatFragmentBase)
 
