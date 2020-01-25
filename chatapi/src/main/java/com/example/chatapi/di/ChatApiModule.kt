@@ -3,9 +3,8 @@ package com.example.chatapi.di
 import com.example.chatapi.ChatActionSupplier
 import com.example.chatapi.ChatState
 import com.example.chatapi.ChatStore
-import com.example.chatapi.di.incoming.ChatDependencies
-import com.example.chatapi.di.outcoming.ChatStarter
-import com.example.chatapi.domain.ChatDispatcher
+import com.example.chatapi.ChatStarter
+import com.example.chatapi.ChatDispatcher
 import com.example.chatapi.impl.ChatDispatcherImpl
 import com.example.chatapi.impl.ChatStarterImpl
 import com.example.chatapi.impl.ChatStoreImpl

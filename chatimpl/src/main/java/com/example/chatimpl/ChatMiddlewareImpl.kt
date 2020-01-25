@@ -1,7 +1,7 @@
 package com.example.chatimpl
 
 import com.example.chatapi.ChatAction
-import com.example.chatapi.di.incoming.ChatMiddleware
+import com.example.chatapi.ChatMiddleware
 import com.example.chatapi.ChatActionSupplier
 import com.example.chatimpl.data.ChatStateImpl
 

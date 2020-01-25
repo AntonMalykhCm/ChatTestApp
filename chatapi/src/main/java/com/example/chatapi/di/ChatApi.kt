@@ -1,8 +1,7 @@
-package com.example.chatapi.di.outcoming
+package com.example.chatapi.di
 
+import com.example.chatapi.ChatStarter
 import com.example.chatapi.ChatState
-import com.example.chatapi.di.DaggerChatApiComponent
-import com.example.chatapi.di.incoming.ChatDependencies
 
 interface ChatApi {
     companion object {

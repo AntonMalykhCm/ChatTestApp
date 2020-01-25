@@ -1,9 +1,8 @@
 package com.example.chattestapp
 
 import android.content.Context
-import com.example.chatapi.ChatState
-import com.example.chatapi.di.outcoming.ChatApi
-import com.example.chatapi.di.incoming.ChatDependencies
+import com.example.chatapi.di.ChatApi
+import com.example.chatapi.di.ChatDependencies
 import com.example.chatimpl.data.ChatStateImpl
 import com.example.chatimpl.ui.ChatActivityImpl
 import com.example.dependencyholder.DependencyHolder

@@ -1,5 +1,7 @@
-package com.example.chatapi.di.incoming
+package com.example.chatapi.di
 
+import com.example.chatapi.ChatMiddleware
+import com.example.chatapi.ChatReducer
 import com.example.chatapi.ChatState
 
 interface ChatDependencies<State: ChatState> {

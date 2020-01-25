@@ -1,8 +1,8 @@
 package com.example.chattestapp.di
 
-import com.example.chatapi.di.incoming.ChatDependencies
-import com.example.chatapi.di.incoming.ChatMiddleware
-import com.example.chatapi.di.incoming.ChatReducer
+import com.example.chatapi.di.ChatDependencies
+import com.example.chatapi.ChatMiddleware
+import com.example.chatapi.ChatReducer
 import com.example.chatimpl.ChatMiddlewareImpl
 import com.example.chatimpl.ChatReducerImpl
 import com.example.chatimpl.data.ChatStateImpl

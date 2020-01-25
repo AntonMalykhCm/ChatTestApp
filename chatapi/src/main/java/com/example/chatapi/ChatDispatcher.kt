@@ -1,4 +1,4 @@
-package com.example.chatapi.domain
+package com.example.chatapi
 
 import com.example.chatapi.ChatAction
 import com.example.chatapi.ChatActionSupplier

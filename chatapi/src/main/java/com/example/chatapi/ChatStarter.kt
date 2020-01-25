@@ -1,7 +1,6 @@
-package com.example.chatapi.di.outcoming
+package com.example.chatapi
 
 import android.content.Context
-import com.example.chatapi.ChatState
 import com.example.chatapi.ui.ChatActivity
 
 interface ChatStarter {

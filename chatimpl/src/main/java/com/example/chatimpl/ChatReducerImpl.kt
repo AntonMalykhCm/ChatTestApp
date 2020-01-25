@@ -2,7 +2,7 @@ package com.example.chatimpl
 
 import com.example.chatapi.ChatAction
 import com.example.chatapi.ChatStartAction
-import com.example.chatapi.di.incoming.ChatReducer
+import com.example.chatapi.ChatReducer
 import com.example.chatimpl.data.ChatStateImpl
 import com.example.chatimpl.data.actions.NewMessageAction
 

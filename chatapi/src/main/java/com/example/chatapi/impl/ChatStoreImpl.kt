@@ -4,9 +4,9 @@ import androidx.annotation.WorkerThread
 import com.example.chatapi.ChatAction
 import com.example.chatapi.ChatState
 import com.example.chatapi.ChatStore
-import com.example.chatapi.di.incoming.ChatMiddleware
-import com.example.chatapi.di.incoming.ChatReducer
-import com.example.chatapi.domain.ChatDispatcher
+import com.example.chatapi.ChatMiddleware
+import com.example.chatapi.ChatReducer
+import com.example.chatapi.ChatDispatcher
 import io.reactivex.Observable
 import io.reactivex.schedulers.Schedulers
 import io.reactivex.subjects.BehaviorSubject
