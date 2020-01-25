@@ -6,12 +6,11 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.EditText
 import androidx.core.widget.addTextChangedListener
-import com.example.chatapi.ui.ChatFragmentBase
 import com.example.chatimpl.R
 import com.example.chatimpl.data.ChatStateImpl
 import com.example.chatimpl.data.actions.NewMessageAction
 
-internal class ChatMessageFragment : ChatFragmentBase<ChatStateImpl>() {
+internal class ChatMessageFragment : ChatFragmentBase() {
 
     private lateinit var messageInput: EditText
     private lateinit var sendButton: View

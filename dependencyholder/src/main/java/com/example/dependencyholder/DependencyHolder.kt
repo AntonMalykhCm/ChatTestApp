@@ -19,4 +19,8 @@ object DependencyHolder {
         dependencies.remove(key)
     }
 
+    fun contains(key: String): Boolean {
+        return dependencies.containsKey(key)
+    }
+
 }

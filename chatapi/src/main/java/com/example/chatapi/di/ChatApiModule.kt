@@ -39,8 +39,4 @@ internal class ChatApiModule {
     @Provides
     @Singleton
     fun provideChatReducer(dependencies: ChatDependencies<ChatState>) = dependencies.getChatReducer()
-
-    @Provides
-    @Singleton
-    fun provideChatFragmentsProvider(dependencies: ChatDependencies<ChatState>) = dependencies.getChatFragmentProvider()
 }

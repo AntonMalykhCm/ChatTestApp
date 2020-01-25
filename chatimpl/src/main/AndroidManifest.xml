@@ -3,6 +3,6 @@
 
     <application>
         <activity android:name=".ui.ChatActivityImpl"
-            android:theme="@style/Theme.AppCompat.DayNight.NoActionBar"/>
+            android:theme="@style/Theme.AppCompat.DayNight.Dialog.Alert"/>
     </application>
 </manifest>

@@ -4,7 +4,6 @@ import com.example.chatapi.ChatState
 import com.example.chatapi.di.incoming.ChatDependencies
 import com.example.chatapi.di.outcoming.ChatApi
 import com.example.chatapi.ui.ChatActivity
-import com.example.chatapi.ui.ChatFragmentBase
 import dagger.BindsInstance
 import dagger.Component
 import javax.inject.Singleton
@@ -18,7 +17,6 @@ import javax.inject.Singleton
 internal interface ChatApiComponent : ChatApi {
 
     fun inject(chatActivity: ChatActivity<ChatState>)
-    fun inject(chatFragment: ChatFragmentBase<ChatState>)
 
     @Component.Factory
     interface Factory {

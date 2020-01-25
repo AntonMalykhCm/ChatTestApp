@@ -1,32 +1,36 @@
-package com.example.chatapi.ui
+package com.example.chatimpl.ui
 
 import android.os.Bundle
 import androidx.annotation.CallSuper
 import androidx.fragment.app.Fragment
 import com.example.chatapi.ChatActionSupplier
-import com.example.chatapi.ChatState
 import com.example.chatapi.ChatStore
-import com.example.chatapi.di.ChatApiComponent
+import com.example.chatimpl.data.ChatStateImpl
+import com.example.chatimpl.di.ChatUiComponent
 import com.example.dependencyholder.DependencyHolder
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
 import javax.inject.Inject
 
-abstract class ChatFragmentBase<State : ChatState> : Fragment() {
+abstract class ChatFragmentBase : Fragment() {
+
+    internal companion object {
+        const val ARG_KEY_DEPENDENCY_KEY = "ChatFragmentBase.KEY_DEPENDENCY_KEY"
+    }
 
     @Inject
     protected lateinit var chatActionSupplier: ChatActionSupplier
     @Inject
-    lateinit var chatStore: ChatStore<State>
+    lateinit var chatStore: ChatStore<ChatStateImpl>
 
     private var observeChatStateTask: Disposable? = null
 
     @CallSuper
     override fun onCreate(savedInstanceState: Bundle?) {
         (DependencyHolder
-            .get(requireArguments().getString(ChatActivity.KEY_DEPENDENCY_KEY)!!)
-                as? ChatApiComponent)
-            ?.inject(this as ChatFragmentBase<ChatState>)
+            .get(requireArguments().getString(ARG_KEY_DEPENDENCY_KEY)!!)
+                as? ChatUiComponent)
+            ?.inject(this)
 
         super.onCreate(savedInstanceState)
     }
@@ -45,6 +49,6 @@ abstract class ChatFragmentBase<State : ChatState> : Fragment() {
         observeChatStateTask?.dispose()
     }
 
-    abstract fun showChatState(chatState: State)
+    abstract fun showChatState(chatState: ChatStateImpl)
 
 }

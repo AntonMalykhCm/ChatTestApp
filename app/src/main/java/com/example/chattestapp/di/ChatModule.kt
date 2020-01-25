@@ -1,11 +1,8 @@
 package com.example.chattestapp.di
 
-import com.example.chatapi.ChatState
 import com.example.chatapi.di.incoming.ChatDependencies
-import com.example.chatapi.di.incoming.ChatFragmentProvider
 import com.example.chatapi.di.incoming.ChatMiddleware
 import com.example.chatapi.di.incoming.ChatReducer
-import com.example.chatimpl.ChatFragmentProviderImpl
 import com.example.chatimpl.ChatMiddlewareImpl
 import com.example.chatimpl.ChatReducerImpl
 import com.example.chatimpl.data.ChatStateImpl
@@ -26,15 +23,11 @@ class ChatModule {
 
     @Provides
     fun provideChatDependencies(
-        chatFragmentProvider: ChatFragmentProvider<ChatStateImpl>,
         chatMiddleware: ChatMiddleware<ChatStateImpl>,
         chatReducer: ChatReducer<ChatStateImpl>
     ): ChatDependencies<ChatStateImpl> {
         return object :
             ChatDependencies<ChatStateImpl> {
-            override fun getChatFragmentProvider(): ChatFragmentProvider<ChatStateImpl> {
-                return chatFragmentProvider
-            }
 
             override fun getChatMiddleware(): ChatMiddleware<ChatStateImpl> {
                 return chatMiddleware
@@ -44,11 +37,6 @@ class ChatModule {
                 return chatReducer
             }
         }
-    }
-
-    @Provides
-    fun provideChatFragmentProvider(): ChatFragmentProvider<ChatStateImpl> {
-        return ChatFragmentProviderImpl()
     }
 
     @Provides

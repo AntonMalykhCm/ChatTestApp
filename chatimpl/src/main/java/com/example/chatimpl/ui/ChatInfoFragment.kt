@@ -5,11 +5,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
-import com.example.chatapi.ui.ChatFragmentBase
+import androidx.fragment.app.Fragment
 import com.example.chatimpl.data.ChatStateImpl
 import com.example.chatimpl.R
 
-internal class ChatInfoFragment : ChatFragmentBase<ChatStateImpl>() {
+internal class ChatInfoFragment : ChatFragmentBase() {
 
     private lateinit var title: TextView
     private lateinit var messagesCount: TextView
