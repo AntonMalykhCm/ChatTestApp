@@ -36,7 +36,7 @@ abstract class ChatActivity<State: ChatState> : AppCompatActivity() {
         setContentView(R.layout.activity_chat_api_chat)
 
         if (savedInstanceState == null) {
-            chatActionSupplier.supply(ChatStartAction).subscribe()
+            chatActionSupplier.supply(ChatStartIntent).subscribe()
         }
     }
 

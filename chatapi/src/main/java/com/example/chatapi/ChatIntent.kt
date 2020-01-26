@@ -1,3 +1,3 @@
 package com.example.chatapi
 
-interface ChatAction
+interface ChatIntent

@@ -1,7 +1,7 @@
 package com.example.chatapi.impl
 
 import androidx.annotation.WorkerThread
-import com.example.chatapi.ChatAction
+import com.example.chatapi.ChatIntent
 import com.example.chatapi.ChatState
 import com.example.chatapi.ChatStore
 import com.example.chatapi.ChatMiddleware
@@ -32,8 +32,8 @@ internal class ChatStoreImpl<State : ChatState> @Inject constructor(
     }
 
     @WorkerThread
-    private fun processNewAction(action: ChatAction) {
-        val finalAction = chatMiddleware.apply(currentState, action, actionDispatcher)
+    private fun processNewAction(intent: ChatIntent) {
+        val finalAction = chatMiddleware.apply(currentState, intent, actionDispatcher)
         currentState = chatReducer.reduce(currentState, finalAction).also {
             statePublisher.onNext(it)
         }

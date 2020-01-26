@@ -8,7 +8,7 @@ import android.widget.EditText
 import androidx.core.widget.addTextChangedListener
 import com.example.chatimpl.R
 import com.example.chatimpl.data.ChatStateImpl
-import com.example.chatimpl.data.actions.NewMessageAction
+import com.example.chatimpl.data.intents.NewMessageIntent
 
 internal class ChatMessageFragment : ChatFragmentBase() {
 
@@ -31,7 +31,7 @@ internal class ChatMessageFragment : ChatFragmentBase() {
         super.onViewCreated(view, savedInstanceState)
         sendButton.setOnClickListener {
             chatActionSupplier.supply(
-                NewMessageAction(messageInput.text.toString())
+                NewMessageIntent(messageInput.text.toString())
             )
                 .subscribe()
         }

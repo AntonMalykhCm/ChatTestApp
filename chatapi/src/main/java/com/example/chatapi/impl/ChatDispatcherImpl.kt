@@ -1,6 +1,6 @@
 package com.example.chatapi.impl
 
-import com.example.chatapi.ChatAction
+import com.example.chatapi.ChatIntent
 import com.example.chatapi.ChatDispatcher
 import io.reactivex.Completable
 import io.reactivex.Observable
@@ -11,15 +11,15 @@ import javax.inject.Inject
 internal class ChatDispatcherImpl @Inject constructor() :
     ChatDispatcher {
 
-    private val actionPublisher: Subject<ChatAction> = PublishSubject.create()
+    private val intentPublisher: Subject<ChatIntent> = PublishSubject.create()
 
-    override fun supply(action: ChatAction): Completable {
+    override fun supply(intent: ChatIntent): Completable {
         return Completable.fromAction {
-            actionPublisher.onNext(action)
+            intentPublisher.onNext(intent)
         }
     }
 
-    override fun observeChatAction(): Observable<ChatAction> {
-        return actionPublisher
+    override fun observeChatAction(): Observable<ChatIntent> {
+        return intentPublisher
     }
 }

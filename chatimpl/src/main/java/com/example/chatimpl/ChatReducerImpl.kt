@@ -1,24 +1,24 @@
 package com.example.chatimpl
 
-import com.example.chatapi.ChatAction
-import com.example.chatapi.ChatStartAction
+import com.example.chatapi.ChatIntent
+import com.example.chatapi.ChatStartIntent
 import com.example.chatapi.ChatReducer
 import com.example.chatimpl.data.ChatStateImpl
-import com.example.chatimpl.data.actions.NewMessageAction
+import com.example.chatimpl.data.intents.NewMessageIntent
 
 class ChatReducerImpl : ChatReducer<ChatStateImpl> {
 
-    override fun reduce(state: ChatStateImpl?, action: ChatAction): ChatStateImpl {
-        return when (action) {
-            is ChatStartAction -> getDefaultChatState()
-            is NewMessageAction -> getStateWithNewMessage(state, action)
+    override fun reduce(state: ChatStateImpl?, intent: ChatIntent): ChatStateImpl {
+        return when (intent) {
+            is ChatStartIntent -> getDefaultChatState()
+            is NewMessageIntent -> getStateWithNewMessage(state, intent)
             else -> state ?: getDefaultChatState()
         }
     }
 
     private fun getStateWithNewMessage(
         state: ChatStateImpl?,
-        action: NewMessageAction
+        action: NewMessageIntent
     ): ChatStateImpl {
         val state = state ?: getDefaultChatState()
         val headerState =
