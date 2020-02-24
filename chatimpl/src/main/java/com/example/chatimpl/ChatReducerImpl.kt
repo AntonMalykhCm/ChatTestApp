@@ -1,5 +1,6 @@
 package com.example.chatimpl
 
+import android.util.Log
 import com.example.chatimpl.data.ChatState
 import com.example.chatimpl.data.getNextMessageId
 import com.example.chatimpl.data.intents.RenderMessageIntent
@@ -10,11 +11,13 @@ import com.example.mvifeatureapi.api.StartIntent
 class ChatReducerImpl : Reducer<ChatState> {
 
     override fun reduce(state: ChatState?, intent: Intent): ChatState {
-        return when (intent) {
+        val outState = when (intent) {
             is StartIntent -> getDefaultChatState()
             is RenderMessageIntent -> getStateWithNewMessage(state, intent)
             else -> state ?: getDefaultChatState()
         }
+        Log.d("ChatReducerImpl", "State:\n$outState")
+        return outState
     }
 
     private fun getStateWithNewMessage(

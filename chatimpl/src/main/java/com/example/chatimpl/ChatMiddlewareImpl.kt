@@ -1,5 +1,6 @@
 package com.example.chatimpl
 
+import android.util.Log
 import com.example.chatimpl.data.ChatState
 import com.example.mvifeatureapi.api.Intent
 import com.example.mvifeatureapi.api.IntentDispatcher
@@ -10,9 +11,11 @@ class ChatMiddlewareImpl(
 ) : Middleware<ChatState> {
 
     override fun apply(state: ChatState?, intent: Intent, dispatcher: IntentDispatcher): Intent {
-        return middlewares.fold(
+        val intent = middlewares.fold(
             intent,
             { acc, middleware -> middleware.apply(state, acc, dispatcher) }
         )
+        Log.d("ChatMiddlewareImpl", "Intent:\n$intent")
+        return intent
     }
 }
