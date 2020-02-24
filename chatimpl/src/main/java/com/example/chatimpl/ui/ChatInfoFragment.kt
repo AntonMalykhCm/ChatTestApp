@@ -5,8 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
-import androidx.fragment.app.Fragment
-import com.example.chatimpl.data.ChatStateImpl
+import com.example.chatimpl.data.ChatState
 import com.example.chatimpl.R
 
 internal class ChatInfoFragment : ChatFragmentBase() {
@@ -26,7 +25,7 @@ internal class ChatInfoFragment : ChatFragmentBase() {
         return view
     }
 
-    override fun showChatState(chatState: ChatStateImpl) {
+    override fun showChatState(chatState: ChatState) {
         title.text = chatState.headerState.chatName
         messagesCount.text = String.format("%s messages", chatState.headerState.messageCount)
     }

@@ -1,11 +1,9 @@
 package com.example.chatimpl.di
 
-import com.example.chatapi.ChatActionSupplier
-import com.example.chatapi.ChatStore
-import com.example.chatimpl.data.ChatStateImpl
+import com.example.chatimpl.data.ChatState
+import com.example.mvifeatureapi.di.MviFeatureApi
 
-internal interface ChatUiDependencies {
+interface ChatUiDependencies {
 
-    fun getChatActionSupplier(): ChatActionSupplier
-    fun getChatStore(): ChatStore<ChatStateImpl>
+    fun getMviFeatureApi() : MviFeatureApi<ChatState>
 }

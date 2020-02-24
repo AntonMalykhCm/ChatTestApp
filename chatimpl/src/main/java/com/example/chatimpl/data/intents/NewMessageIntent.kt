@@ -1,7 +1,5 @@
 package com.example.chatimpl.data.intents
 
-import com.example.chatapi.ChatIntent
+import com.example.mvifeatureapi.api.Intent
 
-internal data class NewMessageIntent(
-    val message: String
-): ChatIntent
+internal data class NewMessageIntent(val message: String): Intent

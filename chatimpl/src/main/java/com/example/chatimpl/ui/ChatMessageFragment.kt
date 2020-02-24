@@ -7,7 +7,7 @@ import android.view.ViewGroup
 import android.widget.EditText
 import androidx.core.widget.addTextChangedListener
 import com.example.chatimpl.R
-import com.example.chatimpl.data.ChatStateImpl
+import com.example.chatimpl.data.ChatState
 import com.example.chatimpl.data.intents.NewMessageIntent
 
 internal class ChatMessageFragment : ChatFragmentBase() {
@@ -30,7 +30,7 @@ internal class ChatMessageFragment : ChatFragmentBase() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         sendButton.setOnClickListener {
-            chatActionSupplier.supply(
+            chatDispatcher.dispatch(
                 NewMessageIntent(messageInput.text.toString())
             )
                 .subscribe()
@@ -40,7 +40,7 @@ internal class ChatMessageFragment : ChatFragmentBase() {
         }
     }
 
-    override fun showChatState(chatState: ChatStateImpl) {
-        messageInput.setText(chatState.messageState.message)
+    override fun showChatState(chatState: ChatState) {
+        messageInput.setText(chatState.newMessageState.message)
     }
 }

@@ -3,11 +3,11 @@ package com.example.chatimpl.ui
 import android.os.Bundle
 import androidx.annotation.CallSuper
 import androidx.fragment.app.Fragment
-import com.example.chatapi.ChatActionSupplier
-import com.example.chatapi.ChatStore
-import com.example.chatimpl.data.ChatStateImpl
+import com.example.chatimpl.data.ChatState
 import com.example.chatimpl.di.ChatUiComponent
 import com.example.dependencyholder.DependencyHolder
+import com.example.mvifeatureapi.api.IntentDispatcher
+import com.example.mvifeatureapi.api.Store
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
 import javax.inject.Inject
@@ -19,26 +19,24 @@ internal abstract class ChatFragmentBase : Fragment() {
     }
 
     @Inject
-    protected lateinit var chatActionSupplier: ChatActionSupplier
+    protected lateinit var chatDispatcher: IntentDispatcher
     @Inject
-    lateinit var chatStore: ChatStore<ChatStateImpl>
+    lateinit var chatStore: Store<ChatState>
 
     private var observeChatStateTask: Disposable? = null
 
-    @CallSuper
-    override fun onCreate(savedInstanceState: Bundle?) {
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
         (DependencyHolder
             .get(requireArguments().getString(ARG_KEY_DEPENDENCY_KEY)!!)
                 as? ChatUiComponent)
             ?.inject(this)
-
-        super.onCreate(savedInstanceState)
     }
 
     override fun onStart() {
         super.onStart()
         observeChatStateTask =
-            chatStore.observeChatState()
+            chatStore.observeState()
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe{ showChatState(it) }
 
@@ -49,6 +47,6 @@ internal abstract class ChatFragmentBase : Fragment() {
         observeChatStateTask?.dispose()
     }
 
-    abstract fun showChatState(chatState: ChatStateImpl)
+    abstract fun showChatState(chatState: ChatState)
 
 }

@@ -1,65 +1,99 @@
 package com.example.chatimpl
 
-import com.example.chatapi.ChatIntent
-import com.example.chatapi.ChatStartIntent
-import com.example.chatapi.ChatReducer
-import com.example.chatimpl.data.ChatStateImpl
-import com.example.chatimpl.data.intents.NewMessageIntent
+import com.example.chatimpl.data.ChatState
+import com.example.chatimpl.data.getNextMessageId
+import com.example.chatimpl.data.intents.RenderMessageIntent
+import com.example.mvifeatureapi.api.Intent
+import com.example.mvifeatureapi.api.Reducer
+import com.example.mvifeatureapi.api.StartIntent
 
-class ChatReducerImpl : ChatReducer<ChatStateImpl> {
+class ChatReducerImpl : Reducer<ChatState> {
 
-    override fun reduce(state: ChatStateImpl?, intent: ChatIntent): ChatStateImpl {
+    override fun reduce(state: ChatState?, intent: Intent): ChatState {
         return when (intent) {
-            is ChatStartIntent -> getDefaultChatState()
-            is NewMessageIntent -> getStateWithNewMessage(state, intent)
+            is StartIntent -> getDefaultChatState()
+            is RenderMessageIntent -> getStateWithNewMessage(state, intent)
             else -> state ?: getDefaultChatState()
         }
     }
 
     private fun getStateWithNewMessage(
-        state: ChatStateImpl?,
-        action: NewMessageIntent
-    ): ChatStateImpl {
+        state: ChatState?,
+        intent: RenderMessageIntent
+    ): ChatState {
         val state = state ?: getDefaultChatState()
-        val headerState =
-            ChatStateImpl.HeaderState(
-                state.headerState.chatName,
-                state.headerState.messageCount + 1
-            )
+        var isNewMessage = true
+        val newMessageList = mutableListOf<ChatState.Message>()
         val feedState =
-            ChatStateImpl.FeedState(
-                state.feedState.messages.toMutableList()
-                    .also {
-                        it.add(ChatStateImpl.Message(false, action.message))
+            ChatState.FeedState(
+                state.feedState.messages.fold(
+                    newMessageList,
+                    { acc, message ->
+                        val toAdd =
+                            if (message.id == intent.id) {
+                                isNewMessage = false
+                                ChatState.Message(
+                                    intent.isIncoming,
+                                    intent.message,
+                                    intent.isLocal,
+                                    message.id
+                                )
+                            } else message
+                        acc.add(toAdd)
+                        acc
                     }
+                )
             )
-        val messageState = ChatStateImpl.MessageState("")
-        return ChatStateImpl(headerState, feedState, messageState)
+        if (isNewMessage) {
+            newMessageList.add(
+                ChatState.Message(
+                    intent.isIncoming,
+                    intent.message,
+                    intent.isLocal,
+                    intent.id
+                )
+            )
+        }
+        val headerState =
+            ChatState.HeaderState(
+                state.headerState.chatName,
+                newMessageList.size
+            )
+        val messageState =
+            if (intent.isLocal) ChatState.NewMessageState("")
+            else state.newMessageState
+        return ChatState(headerState, feedState, messageState)
     }
 
-    private fun getDefaultChatState(): ChatStateImpl {
-        return ChatStateImpl(
-            ChatStateImpl.HeaderState(
+    private fun getDefaultChatState(): ChatState {
+        return ChatState(
+            ChatState.HeaderState(
                 "Чад кутежа",
                 3
             ),
-            ChatStateImpl.FeedState(
+            ChatState.FeedState(
                 listOf(
-                    ChatStateImpl.Message(
+                    ChatState.Message(
                         true,
-                        "Привет!"
-                    ),
-                    ChatStateImpl.Message(
+                        "Привет!",
                         false,
-                        "Привет!"
+                        getNextMessageId()
                     ),
-                    ChatStateImpl.Message(
+                    ChatState.Message(
+                        false,
+                        "Привет!",
+                        false,
+                        getNextMessageId()
+                    ),
+                    ChatState.Message(
                         true,
-                        "Как дела?"
+                        "Как дела?",
+                        false,
+                        getNextMessageId()
                     )
                 )
             ),
-            ChatStateImpl.MessageState(
+            ChatState.NewMessageState(
                 "Отлич"
             )
         )

@@ -1,12 +1,17 @@
 package com.example.chattestapp.di
 
-import com.example.chatapi.di.ChatDependencies
-import com.example.chatapi.ChatMiddleware
-import com.example.chatapi.ChatReducer
 import com.example.chatimpl.ChatMiddlewareImpl
 import com.example.chatimpl.ChatReducerImpl
-import com.example.chatimpl.data.ChatStateImpl
-import com.example.chattestapp.Router
+import com.example.chatimpl.data.ChatState
+import com.example.chatimpl.di.ChatUiDependencies
+import com.example.chatimpl.middlewares.SocketListenerMiddleware
+import com.example.chatimpl.middlewares.UploadNewMessageMiddleware
+import com.example.chattestapp.RouterImpl
+import com.example.dependencyholder.DependencyHolder
+import com.example.mvifeatureapi.api.*
+import com.example.mvifeatureapi.di.MviFeatureApi
+import com.example.mvifeatureapi.di.MviFeatureDependencies
+import com.example.router.Router
 import dagger.Module
 import dagger.Provides
 import javax.inject.Provider
@@ -17,35 +22,51 @@ class ChatModule {
 
     @Provides
     @Singleton
-    fun provideRouter(chatDependenciesProvider: Provider<ChatDependencies<ChatStateImpl>>): Router {
-        return Router(chatDependenciesProvider)
+    fun provideRouter(chatDependenciesProvider: Provider<ChatUiDependencies>): Router {
+        val router = RouterImpl(chatDependenciesProvider)
+        DependencyHolder.put(RouterImpl.ROUTER_DEPENDENCY_HOLDER_KEY, router)
+        return router
     }
 
     @Provides
-    fun provideChatDependencies(
-        chatMiddleware: ChatMiddleware<ChatStateImpl>,
-        chatReducer: ChatReducer<ChatStateImpl>
-    ): ChatDependencies<ChatStateImpl> {
-        return object :
-            ChatDependencies<ChatStateImpl> {
-
-            override fun getChatMiddleware(): ChatMiddleware<ChatStateImpl> {
-                return chatMiddleware
-            }
-
-            override fun getChatReducer(): ChatReducer<ChatStateImpl> {
-                return chatReducer
+    fun provideChatUiDependencies(mviFeatureApi: MviFeatureApi<ChatState>): ChatUiDependencies {
+        return object : ChatUiDependencies {
+            override fun getMviFeatureApi(): MviFeatureApi<ChatState> {
+                return mviFeatureApi
             }
         }
     }
 
     @Provides
-    fun provideChatMiddleware(): ChatMiddleware<ChatStateImpl> {
-        return ChatMiddlewareImpl()
+    fun provideChatMviFeatureApi(
+        chatMiddleware: Middleware<ChatState>,
+        chatReducer: Reducer<ChatState>
+    ): MviFeatureApi<ChatState> {
+        return MviFeatureApi.get(
+            object : MviFeatureDependencies<ChatState> {
+                override fun getMiddleware(): Middleware<ChatState> {
+                    return chatMiddleware
+                }
+
+                override fun getReducer(): Reducer<ChatState> {
+                    return chatReducer
+                }
+            }
+        )
     }
 
     @Provides
-    fun provideChatReducer(): ChatReducer<ChatStateImpl> {
+    fun provideChatMiddleware(): Middleware<ChatState> {
+        return ChatMiddlewareImpl(
+            listOf(
+                SocketListenerMiddleware(),
+                UploadNewMessageMiddleware()
+            )
+        )
+    }
+
+    @Provides
+    fun provideChatReducer(): Reducer<ChatState> {
         return ChatReducerImpl()
     }
 

@@ -2,7 +2,7 @@
     package="com.example.chatimpl" >
 
     <application>
-        <activity android:name=".ui.ChatActivityImpl"
+        <activity android:name=".ui.ChatActivity"
             android:theme="@style/Theme.AppCompat.DayNight.Dialog.Alert"/>
     </application>
 </manifest>

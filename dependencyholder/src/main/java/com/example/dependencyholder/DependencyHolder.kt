@@ -12,7 +12,7 @@ object DependencyHolder {
 
     fun get(key: String): Any {
         return dependencies[key]
-            ?: throw IllegalStateException("put the dependency for the key first")
+            ?: throw IllegalStateException("put the dependency for the key $key first")
     }
 
     fun release(key: String) {
