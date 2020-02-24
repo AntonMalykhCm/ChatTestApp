@@ -14,6 +14,8 @@ import com.example.dependencyholder.DependencyHolder
 import com.example.mvifeatureapi.api.IntentDispatcher
 import com.example.router.Router
 import javax.inject.Inject
+typealias StartIntent = com.example.mvifeatureapi.api.Intent.Start
+typealias StopIntent = com.example.mvifeatureapi.api.Intent.Stop
 
 class ChatActivity : AppCompatActivity() {
 
@@ -40,9 +42,9 @@ class ChatActivity : AppCompatActivity() {
     private var isCreationFailed = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_chat)
         isCreationFailed = !installDependencyGraph()
-        super.onCreate(savedInstanceState)
         if (isCreationFailed){
             (DependencyHolder.get(intent.getStringExtra(ROUTER_KEY)) as? Router)
                 ?.toChat(this)
@@ -55,7 +57,7 @@ class ChatActivity : AppCompatActivity() {
 
         if (savedInstanceState == null) {
             dispatcher
-                .dispatch(com.example.mvifeatureapi.api.Intent.Start)
+                .dispatch(StartIntent)
                 .doOnError { }
                 .subscribe()
         }
@@ -71,7 +73,7 @@ class ChatActivity : AppCompatActivity() {
             DependencyHolder.release(CHAT_DI_GRAPH_KEY)
             if (!isCreationFailed){
                 dispatcher
-                    .dispatch(com.example.mvifeatureapi.api.Intent.Stop)
+                    .dispatch(StopIntent)
                     .doOnError { }
                     .subscribe()
             }
@@ -130,10 +132,10 @@ class ChatActivity : AppCompatActivity() {
             return false
         }
         val deps = DependencyHolder.get(CHAT_DI_GRAPH_DEPENDENCY_KEY)
+        DependencyHolder.release(CHAT_DI_GRAPH_DEPENDENCY_KEY)
         if (deps !is ChatUiDependencies) {
             return false
         }
-        DependencyHolder.release(CHAT_DI_GRAPH_DEPENDENCY_KEY)
         DependencyHolder.put(
             CHAT_DI_GRAPH_KEY,
             DaggerChatUiComponent
