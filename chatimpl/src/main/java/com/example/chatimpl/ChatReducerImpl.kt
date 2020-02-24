@@ -7,6 +7,9 @@ import com.example.chatimpl.data.intents.RenderMessageIntent
 import com.example.mvifeatureapi.api.Intent
 import com.example.mvifeatureapi.api.Reducer
 
+/**
+ * [Reducer] implementation to provide new [ChatState] from incoming intents [Intent].
+ */
 class ChatReducerImpl : Reducer<ChatState> {
 
     override fun reduce(state: ChatState?, intent: Intent): ChatState {

@@ -7,10 +7,14 @@ import io.reactivex.subjects.BehaviorSubject
 import io.reactivex.subjects.Subject
 import javax.inject.Inject
 
+/**
+ * [Store] implementation that glues the chain to
+ * [intentDispatcher] -> [middleware] -> [reducer] -> [statePublisher]
+ */
 internal class StoreImpl<S : State> @Inject constructor(
     private val intentDispatcher: IntentDispatcher,
-    private val chatMiddleware: Middleware<S>,
-    private val chatReducer: Reducer<S>,
+    private val middleware: Middleware<S>,
+    private val reducer: Reducer<S>,
     schedulers: Schedulers
     ) : Store<S> {
 
@@ -29,8 +33,8 @@ internal class StoreImpl<S : State> @Inject constructor(
     }
 
     private fun processNewAction(intent: Intent) {
-        val finalAction = chatMiddleware.apply(currentState, intent, intentDispatcher)
-        currentState = chatReducer.reduce(currentState, finalAction).also {
+        val finalAction = middleware.apply(currentState, intent, intentDispatcher)
+        currentState = reducer.reduce(currentState, finalAction).also {
             statePublisher.onNext(it)
         }
     }

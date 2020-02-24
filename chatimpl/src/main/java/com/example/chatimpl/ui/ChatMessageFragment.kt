@@ -10,6 +10,9 @@ import com.example.chatimpl.R
 import com.example.chatimpl.data.ChatState
 import com.example.chatimpl.data.intents.NewMessageIntent
 
+/**
+ * Fragment for rendering the view for message composing.
+ */
 internal class ChatMessageFragment : ChatFragmentBase() {
 
     private lateinit var messageInput: EditText

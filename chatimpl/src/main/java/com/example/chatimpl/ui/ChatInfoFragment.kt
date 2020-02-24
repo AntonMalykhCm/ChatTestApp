@@ -8,6 +8,9 @@ import android.widget.TextView
 import com.example.chatimpl.data.ChatState
 import com.example.chatimpl.R
 
+/**
+ * Framgment for rendering chat infos.
+ */
 internal class ChatInfoFragment : ChatFragmentBase() {
 
     private lateinit var title: TextView

@@ -9,6 +9,10 @@ import io.reactivex.subjects.PublishSubject
 import io.reactivex.subjects.Subject
 import javax.inject.Inject
 
+/**
+ * [IntentDispatcher] that uses single thread for processing the queue of intents [Intent].
+ * @param schedulers [Schedulers] implementation.
+ */
 internal class IntentDispatcherImpl @Inject constructor(
     schedulers: Schedulers
 ) : IntentDispatcher {

@@ -9,6 +9,9 @@ import com.example.chatimpl.R
 import com.example.chatimpl.data.ChatState
 import com.example.chatimpl.ui.view.FeedAdapter
 
+/**
+ * Fragment for rendering chat feed.
+ */
 internal class ChatFeedFragment : ChatFragmentBase() {
 
     private lateinit var feedRecyclerView: RecyclerView

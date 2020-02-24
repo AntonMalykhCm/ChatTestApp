@@ -12,6 +12,9 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.chatimpl.R
 import com.example.chatimpl.data.ChatState
 
+/**
+ * [RecyclerView.Adapter] for rendering chat feed.
+ */
 internal class FeedAdapter
     : ListAdapter<ChatState.Message, FeedAdapter.MessageViewHolder>(ItemCallback()) {
 

@@ -2,6 +2,6 @@ package com.example.mvifeatureapi.domain
 
 import io.reactivex.Scheduler
 
-interface Schedulers {
+internal interface Schedulers {
     fun newSingle() : Scheduler
 }

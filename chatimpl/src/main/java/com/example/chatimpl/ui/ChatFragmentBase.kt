@@ -12,6 +12,9 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
 import javax.inject.Inject
 
+/**
+ * Base chat feed fragment.
+ */
 internal abstract class ChatFragmentBase : Fragment() {
 
     internal companion object {

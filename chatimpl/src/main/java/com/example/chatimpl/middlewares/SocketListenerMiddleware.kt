@@ -10,6 +10,9 @@ import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
 import java.util.concurrent.TimeUnit
 
+/**
+ * [Middleware] implementation that imitates incoming messages from the external source.
+ */
 class SocketListenerMiddleware : Middleware<ChatState> {
 
     private var socketEventsTask: Disposable? = null

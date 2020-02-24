@@ -13,6 +13,9 @@ import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
 import java.util.concurrent.TimeUnit
 
+/**
+ * [Middleware] implementation that imitates pushing new messages to the server.
+ */
 class UploadNewMessageMiddleware : Middleware<ChatState> {
 
     private val compositeDisposable = CompositeDisposable()

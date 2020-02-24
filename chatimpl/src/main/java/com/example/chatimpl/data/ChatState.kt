@@ -2,11 +2,16 @@ package com.example.chatimpl.data
 
 import com.example.mvifeatureapi.api.State
 
-const val ID_NOT_LOCAL = -1
 private var ID_COUNTER = 0
 
-fun getNextMessageId() = ID_COUNTER++
+/**
+ * Provides id for the message.
+ */
+internal fun getNextMessageId() = ID_COUNTER++
 
+/**
+ * State of the chat feature.
+ */
 data class ChatState(
     val headerState: HeaderState,
     val feedState: FeedState,

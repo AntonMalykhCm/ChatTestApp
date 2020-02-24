@@ -17,10 +17,13 @@ import javax.inject.Inject
 typealias StartIntent = com.example.mvifeatureapi.api.Intent.Start
 typealias StopIntent = com.example.mvifeatureapi.api.Intent.Stop
 
+/**
+ * Chat feature activity.
+ */
 class ChatActivity : AppCompatActivity() {
 
     companion object {
-        internal const val CHAT_DI_GRAPH_DEPENDENCY_KEY =
+        private const val CHAT_DI_GRAPH_DEPENDENCY_KEY =
             "com.example.chatimpl.ui.CHAT_DI_DEPENDENCY_KEY"
         private const val CHAT_DI_GRAPH_KEY = "com.example.chatimpl.ui.CHAT_DI_GRAPH_KEY"
         private const val ROUTER_KEY = "com.example.chatimpl.ui.ROUTER_KEY"
@@ -28,6 +31,11 @@ class ChatActivity : AppCompatActivity() {
         private const val TAG_FRAGMENT_CHAT_FEED = "TAG_FRAGMENT_CHAT_FEED"
         private const val TAG_FRAGMENT_CHAT_MESSAGE = "TAG_FRAGMENT_CHAT_MESSAGE"
 
+        /**
+         * Launches chat feature.
+         * [routerKey] is the key for obtaining [Router] from [DependencyHolder],
+         * should be used when activity is started after being suppressed by the OS.
+         */
         fun launch(from: Context, dependencies: ChatUiDependencies, routerKey: String) {
             DependencyHolder.put(CHAT_DI_GRAPH_DEPENDENCY_KEY, dependencies)
             from.startActivity(

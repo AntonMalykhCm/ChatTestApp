@@ -2,6 +2,9 @@ package com.example.dependencyholder
 
 import java.lang.IllegalStateException
 
+/**
+ * Holder for sharing dependencies.
+ */
 object DependencyHolder {
 
     private val dependencies = mutableMapOf<String, Any>()
