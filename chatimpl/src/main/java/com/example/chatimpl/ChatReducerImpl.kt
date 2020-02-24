@@ -6,13 +6,12 @@ import com.example.chatimpl.data.getNextMessageId
 import com.example.chatimpl.data.intents.RenderMessageIntent
 import com.example.mvifeatureapi.api.Intent
 import com.example.mvifeatureapi.api.Reducer
-import com.example.mvifeatureapi.api.StartIntent
 
 class ChatReducerImpl : Reducer<ChatState> {
 
     override fun reduce(state: ChatState?, intent: Intent): ChatState {
         val outState = when (intent) {
-            is StartIntent -> getDefaultChatState()
+            is Intent.Start -> getDefaultChatState()
             is RenderMessageIntent -> getStateWithNewMessage(state, intent)
             else -> state ?: getDefaultChatState()
         }
