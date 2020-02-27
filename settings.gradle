@@ -1,2 +1,2 @@
-include ':app', ':chatimpl', ':dependencyholder', ':mvifeatureapi', ':router'
+include ':app', ':chatimpl', ':dependencyholder', ':mvifeatureapi', ':router', ':chatmvicoreimpl'
 rootProject.name='Chat Test App'

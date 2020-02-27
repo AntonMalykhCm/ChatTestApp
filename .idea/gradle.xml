@@ -10,6 +10,7 @@
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/app" />
             <option value="$PROJECT_DIR$/chatimpl" />
+            <option value="$PROJECT_DIR$/chatmvicoreimpl" />
             <option value="$PROJECT_DIR$/dependencyholder" />
             <option value="$PROJECT_DIR$/mvifeatureapi" />
             <option value="$PROJECT_DIR$/router" />
